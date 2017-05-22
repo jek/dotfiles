@@ -41,11 +41,10 @@ attic=~/.hgplugins/hgattic/hgattic.py
 fold=~/.hgplugins/hgfold/fold.py
 histedit=~/.hgplugins/histedit/hg_histedit.py
 collapse=~/.hgplugins/hgcollapse/hgext/collapse.py
-pbranch=~/.hgplugins/pbranch.py
 prompt=~/.hgplugins/hg-prompt/prompt.py
 rdiff=~/.hgplugins/rdiff/rdiff.py
 rebaseif=~/.hgplugins/ml-hgext/rebaseif.py
-reposettings=~/.hgplugins/reposettings.py
+reposettings=~/.hgplugins/reposettings/reposettings.py
 
 [reposettings]
 base = ~

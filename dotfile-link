@@ -34,11 +34,7 @@ def managed():
             if any(full_path.startswith(i) for i in IGNORED):
                 continue
 
-            if not local_dir:
-                target = ("~/.%s" % full_path)
-            else:
-                target = ("~/%s" % full_path)
-
+            target = ("~/.%s" % full_path)
             yield join(REPO, full_path), expanduser(target)
 
 
