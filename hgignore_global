@@ -1,0 +1,14 @@
+syntax: regexp
+
+\.py[co]$
+\$py\.class$
+\b\.(DS_Store|Trash|AppleDouble|_|\#)
+\bbranch-env/
+\.egg-info
+^junk$
+^\.coverage\.
+^\.coverage\$
+
+syntax: glob
+.\#*
+\#*\#

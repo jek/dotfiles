@@ -1,0 +1,25 @@
+[user]
+	name = jason kirtland
+	email = jek@discorporate.us
+[color]
+	status = auto
+	diff = auto
+	branch = auto
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+[merge]
+	tool = opendiff
+[core]
+	legacyheaders = false
+	excludesfile = /Users/jek/.gitignore
+[repack]
+	userdeltabaseoffset = true
+
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

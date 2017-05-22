@@ -1,0 +1,20 @@
+import atexit
+import os
+import readline
+import rlcompleter
+
+readline.parse_and_bind('tab: complete')
+
+history = os.path.expanduser("~/.pyihistory")
+
+try:
+    readline.read_history_file(history)
+except IOError:
+    pass
+
+def save_history(path=history):
+    import readline
+    readline.write_history_file(path)
+atexit.register(save_history)
+
+del os, atexit, readline, rlcompleter, save_history, history
