@@ -19,3 +19,8 @@ if ([[ $MACHTYPE = x86_64-apple-darwin10.0 ]]) then
 fi
 
 . ~/.bashrc
+
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+for f in /Applications/Docker.app/Contents/Resources/etc/*bash-completion; do
+  source $f
+done
