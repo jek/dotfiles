@@ -1,6 +1,5 @@
 [ui]
 username=jason kirtland <jek@discorporate.us>
-ignore=~/.hgignore_global
 
 [alias]
 ready= out -r default
@@ -11,18 +10,6 @@ khaaaaan = blame -u
 khaaaaaan = blame -u
 khaaaaaaan = blame -u
 khaaaaaaaan = blame -u
-lög = log
-pout = out
-changelog = log --template "*\t{desc|strip|fill68|tabindent}\n\t[{author|person}] r{node|short}\n\n"
-idiff = !$HG diff --git $* | ipaste2 -l diff
-ishare = !$HG diff $* | ipaste2 -l diff -f fishbowl -s "New paste: $($HG prompt 'diff -r {node|short}') ({paste})" -t "$($HG prompt '{branch|quiet}')"
-ithumb = !$HG diff $* | ipaste2 -l diff -f fishbowl -s "#thumb request: $($HG prompt 'diff -r {node|short}') ({paste})" -t "$($HG prompt '{branch|quiet}')"
-
-
-[web]
-push_ssl = false
-allow_push = *
-cacerts = ~/.hgplugins/cacert.pem
 
 [extensions]
 hgext.bookmarks=
@@ -37,57 +24,12 @@ hgext.rebase=
 hgext.record=
 hgext.schemes=
 hgext.transplant=
-attic=~/.hgplugins/hgattic/hgattic.py
-fold=~/.hgplugins/hgfold/fold.py
-histedit=~/.hgplugins/histedit/hg_histedit.py
-collapse=~/.hgplugins/hgcollapse/hgext/collapse.py
-prompt=~/.hgplugins/hg-prompt/prompt.py
-rdiff=~/.hgplugins/rdiff/rdiff.py
-rebaseif=~/.hgplugins/ml-hgext/rebaseif.py
-reposettings=~/.hgplugins/reposettings/reposettings.py
 
 [reposettings]
 base = ~
-
-[ui projects/oss]
-username = jason kirtland <jek@discorporate.us>
-
-[ui work]
-username = Jason Kirtland <jason@idealist.org>
-
-[alias work]
-sshare = !$HG diff $* | ipaste2 -l diff -f sandbox -s "$($HG prompt 'diff -r {node|short} ({branch})')"
 
 [pager]
 pager = LESS='FSRX' less
 quiet = true
 ignore = version, help, update
 
-[schemes]
-awb = ssh://hg.awbdev.org//hg/
-
-[extdiff]
-cmd.kdiff3 =
-kdiff3.args = $base $local $other -o $output
-cmd.gdiff = opendiff-w
-filemerge.args = $local $other -ancestor $base -merge $output
-cmd.ksdiff = /usr/local/bin/ksdiff-wrapper
-opts.ksdiff = hg
-cmd.sourcetreediff=opendiff
-opts.sourcetreediff=
-
-[merge-tools]
-#filemerge.executable=/Developer/Applications/Utilities/FileMerge.app/Contents/MacOS/FileMerge
-#filemerge.args=-left $other -right $local -ancestor $base -merge $output
-#filemerge.gui=True
-#kdiff3.args=--auto --L1 base --L2 local --L3 other $base $local $other -o $outputkdiff3.gui = True
-sourcetreemerge.gui=False
-sourcetreebulkmerge.gui=False
-sourcetreemerge.binary=False
-sourcetreebulkmerge.executable=/Applications/SourceTree.app/Contents/Resources/hg-merge.sh
-sourcetreemerge.args=$local $other -ancestor $base -merge $output
-sourcetreemerge.checkconflicts=True
-sourcetreemerge.premerge=True
-sourcetreemerge.executable=/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh
-sourcetreebulkmerge.premerge=False
-sourcetreebulkmerge.binary=True
