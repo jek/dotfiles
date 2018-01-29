@@ -26,3 +26,5 @@
 	trustExitCode = true
 [push]
 	default = simple
+[include]
+  path = .gitconfig-secrets

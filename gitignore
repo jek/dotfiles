@@ -3,4 +3,6 @@
 *~
 *.egg-info
 .Python
-
+.tern-port
+aside
+junk
