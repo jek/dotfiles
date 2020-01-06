@@ -1,0 +1,8 @@
+#+PROPERTY: Effort_ALL 0 0:10 0:30 1:00 2:00 3:00 5:00 8:00
+#+COLUMNS: %40ITEM(Task) %17Effort(Estimated Effort){:} %CLOCKSUM
+#+TODO: TODO NEXT | DONE
+#+TODO: LOWPRIO WAIT VERIFY
+#+TODO: | CANCELED
+#+STARTUP: logdone logrefile content entitiespretty 
+#+PRIORITIES: P0 P2 P1
+
