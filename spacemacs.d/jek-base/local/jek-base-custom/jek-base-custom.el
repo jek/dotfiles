@@ -1,7 +1,5 @@
 (setq tab-always-indent t)
 
-(setq auth-sources '("~/.netrc"))
-
 (prefer-coding-system 'utf-8)
 
 (setq truncate-lines nil)

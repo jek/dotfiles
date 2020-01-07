@@ -43,9 +43,6 @@ This function should only modify configuration layer settings."
      better-defaults
      bm
      emacs-lisp
-     git
-     github
-     ivy
      ;; lsp
      markdown
      multiple-cursors
@@ -67,6 +64,7 @@ This function should only modify configuration layer settings."
      jek-windowing
      jek-ivy
      jek-org
+     jek-vcs
      )
 
    ;; List of additional packages that will be installed without being
