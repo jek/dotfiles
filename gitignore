@@ -4,5 +4,11 @@
 *.egg-info
 .Python
 .tern-port
-aside
-junk
+aside/
+junk/
+.idea
+.idea/
+*.iml
+.dir-locals.el
+.projectile
+TODO.org

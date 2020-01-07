@@ -1,22 +1,21 @@
 \set QUIET 1
 
-\pset null '(null)'
 \pset null '∅'
 
--- \pset linestyle unicode
--- \pset border 2
--- \x auto
--- \timing
+\pset linestyle unicode
+\pset border 2
+\x auto
+\timing
 
-\setenv PAGER 'pspg --no-mouse'
-\x off
-\pset pager always
+\setenv PAGER 'pspg -s 7 --no-mouse'
+--\x off
+--\pset pager always
 
 \set ON_ERROR_ROLLBACK interactive
-\set HISTFILE ~/.psql_history- :HOST - :DBNAME
+\set HISTFILE ~/.psql_history
 \set HISTSIZE 2000
-\set PROMPT1 '%n@%/[%M:%>] %[%033[1;31m%x%[%033[0m%# '
-\set PROMPT2 '%# '
+--\set PROMPT1 '%n@%/[%M:%>] %[%033[1;31m%x%[%033[0m%# '
+--\set PROMPT2 '%# '
 \set VERBOSITY verbose
 \set COMP_KEYWORD_CASE upper
 \unset QUIET

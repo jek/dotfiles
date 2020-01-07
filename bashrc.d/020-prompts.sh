@@ -22,5 +22,5 @@ function _vcprompt() {
 }
 
 function codeprompt() {
-    export PS1="${_err_or_white}<$(_family)\w>\e[0m\$(_vcprompt) \e[1;33m⚡\e[0m\$(basename \${VIRTUAL_ENV:-sys})${_reset}\n\\$ "
+    export PS1="\e[2m\e[0;32m⌠\e[0m ${_err_or_white}\w \e[2m\e[0;32m⌡\e[0m\$(_vcprompt) \e[1;33m${_reset}\e]1;\W\n\\$ "
 }

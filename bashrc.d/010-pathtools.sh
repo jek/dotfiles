@@ -21,9 +21,9 @@ export PATH=`pathclean \
 :$HOME/.gem/ruby/1.8/bin\
 :/opt/local/bin\
 :$JAVA_HOME/bin\
+:/usr/local/bin\
 :/usr/etc:/usr/sbin\
 :/usr/ccs/bin:/opt/bin:/usr/bin\
-:/usr/local/bin\
 :/sbin:/usr/sbin:/usr/local/sbin:/etc:/usr/etc\
 :$PATH`
 
