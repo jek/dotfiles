@@ -260,37 +260,13 @@
 
 (defun jek-org/init-org-starter ()
   (use-package org-starter
-    :after org
-    :init
-    (spacemacs/set-leader-keys
-      "oj" 'jek-org/hydra-org-starter/body)
     :hook
     (after-init . org-starter-load-all-files-in-path)
+    :custom
+    (org-starter-load-config-files t)
     :config
-    ;(require 'counsel-org-starter)
-    (setq org-starter-path (quote ("~/org/")))
-    (org-starter-def "~/org"
-      :files
-      ("inbox.org" :agenda t :key "i" :refile (:maxlevel . 5))
-      ("ivy-todo.org" :agenda t :key "t" :refile (:maxlevel . 5))
-      ("home.org" :agenda t :key "h" :refile (:maxlevel . 5))
-      ("notes.org" :agenda t :key "n" :refile (:maxlevel . 5))
-      )
-    (defhydra jek-org/hydra-org-starter nil
-      "
-  Org-starter-files
-  ^^^^------------------------------------------------
- _i_: inbox       _t_: ivy-todo     _h_: home
- _n_: notes
-
-  "
-      ("i" org-starter-find-file:inbox)
-      ("t" org-starter-find-file:ivy-todo)
-      ("h" org-starter-find-file:home)
-      ("n" org-starter-find-file:notes)
-      )
+    (setq org-starter-path '("~/org/"))
     ))
-
 
 (defun jek-org/init-org-starter-swiper ()
   (use-package org-starter-swiper

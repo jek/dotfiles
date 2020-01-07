@@ -93,7 +93,7 @@ This function should only modify configuration layer settings."
    ;; (default is `used-only')
    dotspacemacs-install-packages 'used-only)
 
-  (when (string-suffic-p "salesforce.com" (system-name))
+  (when (string-suffix-p "salesforce.com" (system-name))
     (append dotspacemacs-configuration-layers
             '(jek-sfdo-base)))
   )
@@ -596,6 +596,13 @@ static char *gnus-pointer[] = {
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(objed-cursor-color "#aa4450")
+ '(org-fancy-priorities-list (quote ("\342\200\274" "\342\207\252" "\342\207\243" "\342\230\225")))
+ '(org-priority-faces
+   (quote
+    ((65 :foreground "red" :weight bold :inherit org-priority-face)
+     (66 :foreground "gray50" :inherit org-priority-face)
+     (67 :foreground "yellow" :inherit org-priority-face)
+     (68 :foreground "green" :inherit org-priority-face))))
  '(org-ql-views
    (quote
     (("Finance" :buffers-files
@@ -669,6 +676,7 @@ static char *gnus-pointer[] = {
           [cl-struct-ts-tags ts-adjust day 7 ts-now ts-apply :hour 0 :minute :second type-of signal wrong-type-argument ts string-to-number format-time-string "%w" 17 3 2 1 4 5 6 float-time encode-time 23 59 org-ql-search org-agenda-files ts-active :from :to :title "Next week" :super-groups org-super-agenda-groups :sort
                              (priority)]
           40 "Show items with an active timestamp during the next calendar week." nil]))))
+ '(org-starter-load-config-files t)
  '(org-variable-pitch-fixed-font (quote (:family "Fira Mono")))
  '(org-variable-pitch-font (quote (:family "iA Writer Quattro S")) t)
  '(package-selected-packages
@@ -720,6 +728,7 @@ static char *gnus-pointer[] = {
  '(org-ellipsis ((t (:foreground "LightGoldenrod"))))
  '(org-link ((t (:background "#1e252f" :foreground "#7e9fc9" :underline t))))
  '(org-meta-line ((t (:inherit font-lock-comment-face :height 0.8))))
+ '(org-priority ((t (:family "Source Code Pro" :inherit font-lock-keyword-face))))
  '(treemacs-root-face ((t (:inherit font-lock-comment-face :overline "orange" :weight bold :height 1.2)))))
 )
 
