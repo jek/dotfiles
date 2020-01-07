@@ -1,3 +1,6 @@
+(setq custom-file "~/.emacs.d/private/custom.el")
+(load custom-file)
+
 (setq tab-always-indent t)
 
 (prefer-coding-system 'utf-8)

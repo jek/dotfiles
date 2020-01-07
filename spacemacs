@@ -479,6 +479,8 @@ It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  (setq custom-file "~/.emacs.d/private/custom.el")
+  (load custom-file)
   )
 
 (defun dotspacemacs/user-load ()
@@ -494,239 +496,8 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  ;;;(add-to-list 'load-path "~/.spacemacs.d")
-  ;;;(require 'jek-general-config)
-  ;;;(with-eval-after-load 'org
-  ;;;  (require 'jek-org-config)
-  ;;;  )
-  ;;;(treemacs-resize-icons 44)
-
   ; Work around "Warning (emacs): recentf mode: Non-character input-event"
   (defun ask-user-about-lock (file other-user)
     "A value of t says to grab the lock on the file."
     t)
 )
-
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(alert-default-style (quote osx-notifier))
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
- '(ansi-term-color-vector
-   [unspecified "#081724" "#ff694d" "#68f6cb" "#fffe4e" "#bad6e2" "#afc0fd" "#d2f1ff" "#d3f9ee"] t)
- '(blink-cursor-mode nil)
- '(column-number-mode t)
- '(company-quickhelp-color-background "#4F4F4F")
- '(company-quickhelp-color-foreground "#DCDCCC")
- '(custom-enabled-themes (quote (twilight-anti-bright)))
- '(custom-safe-themes
-   (quote
-    ("e47c0abe03e0484ddadf2ae57d32b0f29f0b2ddfe7ec810bd6d558765d9a6a6c" "dd854be6626a4243375fd290fec71ed4befe90f1186eb5b485a9266011e15b29" "4bdc0dfc53ae06323e031baf691f414babf13c9c9c35014dd07bb42c4db27c24" "5e0b63e0373472b2e1cf1ebcc27058a683166ab544ef701a6e7f2a9f33a23726" "d6f04b6c269500d8a38f3fabadc1caa3c8fdf46e7e63ee15605af75a09d5441e" "0fe9f7a04e7a00ad99ecacc875c8ccb4153204e29d3e57e9669691e6ed8340ce" "450f3382907de50be905ae8a242ecede05ea9b858a8ed3cc8d1fbdf2d57090af" "8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "72085337718a3a9b4a7d8857079aa1144ea42d07a4a7696f86627e46ac52f50b" "cdb4ffdecc682978da78700a461cdc77456c3a6df1c1803ae2dd55c59fa703e3" "64d8237b42b3b01f1487a908836574a5e531ea5efab54b9afa19fb8fda471ab3" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "8fc061103f631acb1a455c039fa705a1fb2a6315bfe21db039af96d33aba799c" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "1119fc59c71d953f66e1b24889886f91ead269831f3e0562cd64b1781cc125c8" "c7aa6fcf85e6fe4ea381733d9166d982bbc423af4a55c26f55f5d0cfb0ce1835" default)))
- '(dired-use-ls-dired (quote unspecified))
- '(evil-want-Y-yank-to-eol nil)
- '(fci-rule-character-color "#192028")
- '(fci-rule-color "#37474f")
- '(fringe-mode 10 nil (fringe))
- '(gnus-logo-colors (quote ("#259ea2" "#adadad")) t)
- '(gnus-mode-line-image-cache
-   (quote
-    (image :type xpm :ascent center :data "/* XPM */
-static char *gnus-pointer[] = {
-/* width height num_colors chars_per_pixel */
-\"    18    13        2            1\",
-/* colors */
-\". c #358d8d\",
-\"# c None s None\",
-/* pixels */
-\"##################\",
-\"######..##..######\",
-\"#####........#####\",
-\"#.##.##..##...####\",
-\"#...####.###...##.\",
-\"#..###.######.....\",
-\"#####.########...#\",
-\"###########.######\",
-\"####.###.#..######\",
-\"######..###.######\",
-\"###....####.######\",
-\"###..######.######\",
-\"###########.######\" };")) t)
- '(hl-paren-background-colors (quote ("#2492db" "#95a5a6" nil)))
- '(hl-paren-colors (quote ("#ecf0f1" "#ecf0f1" "#c0392b")))
- '(hl-todo-keyword-faces
-   (quote
-    (("TODO" . "#dc752f")
-     ("NEXT" . "#dc752f")
-     ("THEM" . "#2d9574")
-     ("PROG" . "#4f97d7")
-     ("OKAY" . "#4f97d7")
-     ("DONT" . "#f2241f")
-     ("FAIL" . "#f2241f")
-     ("DONE" . "#86dc2f")
-     ("NOTE" . "#b1951d")
-     ("KLUDGE" . "#b1951d")
-     ("HACK" . "#b1951d")
-     ("TEMP" . "#b1951d")
-     ("FIXME" . "#dc752f")
-     ("XXX+" . "#dc752f")
-     ("\\?\\?\\?+" . "#dc752f"))))
- '(ivy-omni-org-content-types
-   (quote
-    (agenda-commands org-ql-views buffers files bookmarks)))
- '(ivy-omni-org-file-sources (quote (org-starter-known-files)))
- '(jdee-db-active-breakpoint-face-colors (cons "#1d2127" "#dd8844"))
- '(jdee-db-requested-breakpoint-face-colors (cons "#1d2127" "#858253"))
- '(jdee-db-spec-breakpoint-face-colors (cons "#1d2127" "#494952"))
- '(line-spacing 0.2)
- '(nrepl-message-colors
-   (quote
-    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
- '(objed-cursor-color "#aa4450")
- '(org-fancy-priorities-list (quote ("\342\200\274" "\342\207\252" "\342\207\243" "\342\230\225")))
- '(org-priority-faces
-   (quote
-    ((65 :foreground "red" :weight bold :inherit org-priority-face)
-     (66 :foreground "gray50" :inherit org-priority-face)
-     (67 :foreground "yellow" :inherit org-priority-face)
-     (68 :foreground "green" :inherit org-priority-face))))
- '(org-ql-views
-   (quote
-    (("Finance" :buffers-files
-      ("/Users/jek/org/inbox.org" "/Users/jek/org/ivy-todo.org" "/Users/jek/org/home.org" "/Users/jek/org/notes.org")
-      :query
-      (and
-       (todo)
-       (not
-        (todo "DONE"))
-       (tags "money"))
-      :sort deadline :narrow nil :super-groups
-      ((:auto-priority))
-      :title "Finance")
-     ("Recent entries" . org-ql-view-recent-items)
-     ("Review (to-do keyword without timestamp in past 2 weeks)" :buffers-files org-agenda-files :query
-      (and
-       (todo)
-       (not
-        (ts :from -14)))
-      :title "Review" :sort
-      (date priority todo)
-      :super-groups
-      ((:auto-parent t)))
-     ("Stuck Projects" :buffers-files org-agenda-files :query
-      (and
-       (todo)
-       (children)
-       (not
-        (children
-         (todo "NEXT"))))
-      :title "Stuck Projects" :sort
-      (priority date)
-      :super-groups org-super-agenda-groups)
-     ("Agenda-like" :buffers-files org-agenda-files :query
-      (and
-       (not
-        (done))
-       (or
-        (habit)
-        (deadline auto)
-        (scheduled :to today)
-        (ts-active :on today)))
-      :sort
-      (date)
-      :super-groups org-super-agenda-groups :title "Agenda-like")
-     ("Today" :buffers-files org-agenda-files :query
-      (ts-active :on today)
-      :title "Today" :super-groups org-super-agenda-groups :sort
-      (priority))
-     ("This week" .
-      #[0 "\301 \302\303\304\305\304\306\304\307\310\301 \311!>\204 \312\313\314D\"\210\211\315H\204\232 \211\315\316\317\320\311!>\2048 \312\313\314D\"\210\321H\204\223 \321\322H\323H	\324H
-\325H\326H\327H\211
-\211\203\213 \203\213 \203\213 \203\213 \203\213 \203\213 \330\331
-&!\202\215 \330 \266\206\266\206I\210\321H\"!I\210\211\315H\262[
-#&\302\303\332\305\333\306\333\307\310\327\301 \311!>\204\300 \312\313\314D\"\210\211\315H\204>\211\315\316\317\320\311!>\204\334 \312\313\314D\"\210\321H\2047\321\322H\323H	\324H
-\325H\326H\327H\211
-\211\203/\203/\203/\203/\203/\203/\330\331
-&!\2021\330 \266\206\266\206I\210\321H\"!I\210\211\315H\262Z#&\334\335 \336\337\340\257\341\342\343\344\345\346&\207"
-          [cl-struct-ts-tags ts-now ts-apply :hour 0 :minute :second ts-adjust day type-of signal wrong-type-argument ts 7 string-to-number format-time-string "%w" 17 3 2 1 4 5 6 float-time encode-time 23 59 org-ql-search org-agenda-files ts-active :from :to :title "This week" :super-groups org-super-agenda-groups :sort
-                             (priority)]
-          40 "Show items with an active timestamp during this calendar week." nil])
-     ("Next week" .
-      #[0 "\301\302\303\304 #\305\306\307\310\307\311\307\301\302\304 \312!>\204  \313\314\315D\"\210\211\303H\204\236 \211\303\316\317\320\312!>\204< \313\314\315D\"\210\321H\204\227 \321\322H\323H	\324H
-\325H\326H\327H\211
-\211\203\217 \203\217 \203\217 \203\217 \203\217 \203\217 \330\331
-&!\202\221 \330 \266\206\266\206I\210\321H\"!I\210\211\303H\262[
-#&\305\306\332\310\333\311\333\301\302\327\304 \312!>\204\304 \313\314\315D\"\210\211\303H\204B\211\303\316\317\320\312!>\204\340 \313\314\315D\"\210\321H\204;\321\322H\323H	\324H
-\325H\326H\327H\211
-\211\2033\2033\2033\2033\2033\2033\330\331
-&!\2025\330 \266\206\266\206I\210\321H\"!I\210\211\303H\262Z#&\334\335 \336\337\340\257\341\342\343\344\345\346&\207"
-          [cl-struct-ts-tags ts-adjust day 7 ts-now ts-apply :hour 0 :minute :second type-of signal wrong-type-argument ts string-to-number format-time-string "%w" 17 3 2 1 4 5 6 float-time encode-time 23 59 org-ql-search org-agenda-files ts-active :from :to :title "Next week" :super-groups org-super-agenda-groups :sort
-                             (priority)]
-          40 "Show items with an active timestamp during the next calendar week." nil]))))
- '(org-starter-load-config-files t)
- '(org-variable-pitch-fixed-font (quote (:family "Fira Mono")))
- '(org-variable-pitch-font (quote (:family "iA Writer Quattro S")) t)
- '(package-selected-packages
-   (quote
-    (org-fancy-priorities doom-themes org-variable-pitch org-edna org-ql "org-now" org-now ansi package-build shut-up epl git commander f dash s bicycle perfect-margin which-key-posframe a yequake org-sticky-header ivy-rich ivy-posframe fancy-narrow maple-minibuffer ivy-todo ox-tufte web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode simple-httpd helm-css-scss helm helm-core haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path plantuml-mode diff-hl "diff-hl" vmd-mode smartparens mmm-mode markdown-toc markdown-mode gh-md emoji-cheat-sheet-plus company-emoji company poet-theme which-key use-package treemacs-projectile pcre2el overseer nameless macrostep hybrid-mode helm-xref helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag flycheck-package evil-mc elisp-slime-nav dotenv-mode diminish bind-map auto-compile ace-jump-helm-line)))
- '(pdf-view-midnight-colors (quote ("#b2b2b2" . "#292b2e")))
- '(pos-tip-background-color "#414E63")
- '(pos-tip-foreground-color "#BEC8DB")
- '(safe-local-variable-values
-   (quote
-    ((js2-basic-offset . 2)
-     (js2-strict-missing-semi-warning))))
- '(spaceline-all-the-icons-clock-always-visible nil)
- '(spaceline-all-the-icons-separator-type (quote cup))
- '(spaceline-all-the-icons-window-number-always-visible t)
- '(swiper-stay-on-quit t)
- '(tool-bar-mode nil)
- '(treemacs-is-never-other-window t t)
- '(vc-annotate-background "#202020")
- '(vc-annotate-color-map
-   (list
-    (cons 20 "#858253")
-    (cons 40 "#9e7e3c")
-    (cons 60 "#b77a25")
-    (cons 80 "#d0770f")
-    (cons 100 "#d47c20")
-    (cons 120 "#d88232")
-    (cons 140 "#dd8844")
-    (cons 160 "#c08767")
-    (cons 180 "#a3868a")
-    (cons 200 "#8686ae")
-    (cons 220 "#92708e")
-    (cons 240 "#9e596f")
-    (cons 260 "#aa4450")
-    (cons 280 "#914550")
-    (cons 300 "#794651")
-    (cons 320 "#614751")
-    (cons 340 "#62686E")
-    (cons 360 "#62686E")))
- '(vc-annotate-very-old-color nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
- '(org-drawer ((t (:foreground "LightSkyBlue4" :height 0.6))))
- '(org-ellipsis ((t (:foreground "LightGoldenrod"))))
- '(org-link ((t (:background "#1e252f" :foreground "#7e9fc9" :underline t))))
- '(org-meta-line ((t (:inherit font-lock-comment-face :height 0.8))))
- '(org-priority ((t (:family "Source Code Pro" :inherit font-lock-keyword-face))))
- '(treemacs-root-face ((t (:inherit font-lock-comment-face :overline "orange" :weight bold :height 1.2)))))
-)
-
