@@ -1,0 +1,5 @@
+[user]
+	name = jason kirtland
+	email = jek@discorporate.us
+[include]
+  path = ~/.gitconfig-jek.secrets
