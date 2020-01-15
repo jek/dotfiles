@@ -34,7 +34,6 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layers
    '(html
      markdown
-     ;; `M-m f e R' (Emacs style) to install them.
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
                       auto-completion-use-company-box t
@@ -42,6 +41,7 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-sort-by-usage t)
      better-defaults
      bm
+     semantic
      emacs-lisp
      ;; lsp
      markdown
@@ -58,7 +58,7 @@ This function should only modify configuration layer settings."
      ;;        shell-default-position 'bottom)
      spell-checking
      syntax-checking
-     themes-megapack
+     ;themes-megapack
      ;osx
      jek-base
      jek-windowing
@@ -183,7 +183,10 @@ It should only modify the values of Spacemacs settings."
    ;; `recents' `bookmarks' `projects' `agenda' `todos'.
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
-   dotspacemacs-startup-lists '((recents . 5)
+   dotspacemacs-startup-lists '((agenda . 10)
+                                (todos . 10)
+                                (recents . 5)
+                                (bookmarks . 5)
                                 (projects . 7))
 
    ;; True if the home buffer should respond to resize events. (default t)
@@ -204,8 +207,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(twilight-anti-bright
-                         twilight-bright)
+   dotspacemacs-themes '(doom-opera-light doom-gruvbox)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -222,7 +224,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font or prioritized list of fonts.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 12.6
+                               :size 12.2
                                :weight normal
                                :width normal)
 
@@ -318,17 +320,17 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
-   dotspacemacs-fullscreen-use-non-native nil
+   dotspacemacs-fullscreen-use-non-native t
 
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t 
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
    ;; borderless fullscreen. (default nil)
-   dotspacemacs-undecorated-at-startup nil
+   dotspacemacs-undecorated-at-startup t
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.

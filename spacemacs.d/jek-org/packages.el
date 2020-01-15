@@ -4,6 +4,8 @@
     org-agenda
     org-babel
 
+    (jek-org-custom :location local)
+
     org-variable-pitch
     org-fancy-priorities
 
@@ -42,7 +44,7 @@
     (setq org-crypt-key "DEAE8B55")
     (setq org-download-method 'attach)
     (setq org-edit-src-content-indentation 0)
-    (setq org-ellipsis "  ")
+    (setq org-ellipsis "…")
     (setq org-fontify-done-headline t)
     (setq org-fontify-quote-and-verse-blocks t)
     (setq org-fontify-whole-heading-line t)
@@ -61,60 +63,11 @@
 
     (org-crypt-use-before-save-magic)
 
-    (let* (
-           (comment      "#6272a4")
-           (warning      "#ffb86c")
-           (rainbow-1    "#f8f8f2")
-           (rainbow-2    "#8be9fd")
-           (rainbow-3    "#bd93f9")
-           (rainbow-4    "#ff79c6")
-           (rainbow-5    "#ffb86c")
-           (rainbow-6    "#50fa7b")
-           (rainbow-7    "#f1fa8c")
-           (rainbow-8    "#0189cc")
-           (rainbow-9    "#ff5555")
-           (rainbow-10   "#a0522d")
-           (variable-pitch-font `(:family "iA Writer Quattro S" ))
-           (fixed-pitch-font    `(:family "Fira Mono" ))
-           (fixed-pitch-font-alt `(:family "iA Writer Mono S" )))
-      (setq org-todo-keyword-faces
-            (list
-             `("TODO"
-               ,@fixed-pitch-font
-               :foreground ,comment
-               :weight bold
-               )
-             `("NEXT"
-               ,@fixed-pitch-font
-               :foreground ,warning
-               :weight bold)
-             `("WAIT"
-               ,@fixed-pitch-font
-               :foreground ,rainbow-2
-               :weight bold)
-             `("VERIFY"
-               ,@fixed-pitch-font
-               :foreground ,rainbow-7
-               :weight bold)
-             `("LOWPRIO"
-               ,@fixed-pitch-font
-               :foreground ,comment
-               :weight bold)
-             `("DONE"
-               ,@fixed-pitch-font
-               :foreground ,rainbow-6
-               :weight bold)
-             `("CANCELLED"
-               ,@fixed-pitch-font
-               :foreground ,rainbow-9
-               :weight bold)
-             )))
-
     (require 'org-checklist)
     (defun jek-org/after-org-mode-load ()
       (visual-line-mode 1)
       (vi-tilde-fringe-mode -1)
-      (add-hook 'before-save-hook 'jek-org/org-id-get-create-all nil 'local)
+      ;(add-hook 'before-save-hook 'jek-org/org-id-get-create-all nil 'local)
       (buffer-face-mode 1)
       (face-remap-add-relative 'default :height 150)
       ;(set-face-attribute 'org-indent nil :inherit '(org-hide fixed-pitch))
@@ -124,11 +77,28 @@
     (defun jek-org/org-id-get-create-all ()
       (interactive)
       (org-map-entries 'org-id-get-create))
+    (defun jek-org/prettify-checkboxes ()
+      (push '("[ ]" . "🔲") prettify-symbols-alist)
+      (push '("[X]" . "☑" ) prettify-symbols-alist)
+      (push '("[-]" . "⭕" ) prettify-symbols-alist)
+      (prettify-symbols-mode))
 
+    (defface org-checkbox-done-text
+      '((t (:foreground "#71696A" :strike-through t)))
+      "Face for the text part of a checked org-mode checkbox.")
+    (font-lock-add-keywords
+     'org-mode
+     `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)"
+        1 'org-checkbox-done-text prepend)))
     :hook
     ((org-mode . jek-org/after-org-mode-load)
+     (org-mode . jek-org/prettify-checkboxes)
      (org-archive . my-org-config/after-org-archive)
      (org-capture-prepare-finalize . org-id-get-create))
+    ))
+
+(defun jek-org/init-jek-org-custom ()
+  (use-package jek-org-custom
     ))
 
 (defun jek-org/init-org-fancy-priorities ()

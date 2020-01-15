@@ -3,6 +3,7 @@
     all-the-icons-dired
     git-auto-commit-mode
     (jek-base-custom :location local)
+    (jek-themes :location local)
     ))
 
 (defun jek-base/init-all-the-icons-dired ()
@@ -20,4 +21,8 @@
 
 (defun jek-base/init-jek-base-custom ()
   (use-package jek-base-custom
+    ))
+
+(defun jek-base/init-jek-themes ()
+  (use-package jek-themes
     ))
