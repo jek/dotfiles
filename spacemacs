@@ -32,8 +32,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(html
-     markdown
+   '(
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
                       auto-completion-use-company-box t
@@ -41,25 +40,35 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-sort-by-usage t)
      better-defaults
      bm
-     semantic
+     csv
+     dap
+     deft
      emacs-lisp
-     ;; lsp
+     graphviz
+     html
+     javascript
+     lsp
+     lua
+     kotlin
      markdown
      multiple-cursors
      (org :variables
           org-enable-org-journal-support t
           org-enable-sticky-header t
           org-projectile-file "TODO.org")
-     deft
      (plantuml :variables
+               plantuml-jar-path "~/bin/plantuml.jar"
+	             plantuml-default-exec-mode 'executable
                org-plantuml-jar-path "~/bin/plantuml.jar")
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     python
+     rust
+     ;semantic
+     (shell :variables
+	          shell-default-shell 'vterm)
      spell-checking
+     sql
      syntax-checking
-     ;themes-megapack
-     ;osx
+     yaml
      jek-base
      jek-windowing
      jek-ivy
@@ -80,7 +89,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(emacs-purpose window-purpose)
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -167,7 +176,8 @@ It should only modify the values of Spacemacs settings."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'hybrid
+   dotspacemacs-editing-style '(hybrid :variables
+                                       hybrid-style-visual-feedback t)
 
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
@@ -207,7 +217,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-opera-light doom-gruvbox)
+   dotspacemacs-themes '(doom-gruvbox doom-opera-light) 
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -390,7 +400,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
-   dotspacemacs-folding-method 'evil
+   dotspacemacs-folding-method 'origami
 
    ;; If non-nil `smartparens-strict-mode' will be enabled in programming modes.
    ;; (default nil)

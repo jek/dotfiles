@@ -15,7 +15,5 @@
             (t               . ivy-posframe-display-at-frame-center))
           ivy-posframe-height-alist '((t . 24))
           ivy-posframe-parameters
-          '((internal-border-width . 6)
-            (internal-border-color . "#2d3543")
-            (background-color . "#212731")))
+          '((internal-border-width . 4)))
     (ivy-posframe-mode +1)))

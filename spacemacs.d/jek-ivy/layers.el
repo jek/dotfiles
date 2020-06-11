@@ -1,1 +1,1 @@
-(configuration-layer/declare-layer 'ivy)
+(configuration-layer/declare-layer '(ivy :variables ivy-enable-advanced-buffer-information t))
