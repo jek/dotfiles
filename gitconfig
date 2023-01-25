@@ -9,12 +9,12 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [core]
 	legacyheaders = false
-	excludesfile = /Users/jek/.gitignore
+	excludesfile = ~/.config/git/gitignore
 [repack]
 	userdeltabaseoffset = true
 [push]
 	default = simple
 [includeIf "gitdir:/Users/jek/"]
-  path = ~/.gitconfig-jek
+  path = ~/.config/git/gitconfig-jek
 [includeIf "gitdir:/Users/jkirtland/"]
-  path = ~/.gitconfig-jkirtland
+  path = ~/.config/git/gitconfig-jkirtland
