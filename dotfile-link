@@ -10,8 +10,9 @@ HOME = environ['HOME']
 IGNORED = []
 chdir(REPO)
 
+
 def eprint(msg):
-    print(msg, file=sys.stderr)
+    print(msg, file=stderr)
 
 
 def expand_ignored():
@@ -55,7 +56,7 @@ for source, target in managed():
             noop += 1
         continue
     elif exists(target):
-        eprint (f"* skipping: {target} already exists")
+        eprint(f"* skipping: {target} already exists")
         error += 1
         continue
     else:
@@ -69,4 +70,3 @@ for source, target in managed():
 
 print(f"{noop} unchanged, {new} new links, "
       f"{newdir} directories created, {error} errors.")
-
