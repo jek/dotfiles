@@ -1,4 +1,5 @@
 set PATH $PATH ~/.cargo/bin
+set PATH $PATH ~/Library/Python/3.8/bin
 
 if status is-interactive
     set fish_greeting
