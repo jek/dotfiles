@@ -9,7 +9,9 @@ then
     [[ -t 0 ]] && stty intr '^C' susp '^Z' echoe
 fi
 
-if which keychain 2>&1 >/dev/null; then
+export LC_ALL=C.UTF-8
+
+if hash keychain 2>/dev/null; then
   keychain -q ~/.ssh/id_???
 fi
 
@@ -21,6 +23,3 @@ fi
 . ~/.bashrc
 
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-for f in /Applications/Docker.app/Contents/Resources/etc/*bash-completion; do
-  source $f
-done
