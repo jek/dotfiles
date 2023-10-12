@@ -1,0 +1,2 @@
+#!/bin/sh
+waybar -b bar-1 -c ~/.config/waybar/bar-1.json
