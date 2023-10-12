@@ -16,5 +16,7 @@
 	default = simple
 [includeIf "gitdir:/Users/jek/"]
   path = ~/.config/git/gitconfig-jek
+[includeIf "gitdir:/home/jek/"]
+  path = ~/.config/git/gitconfig-jek
 [includeIf "gitdir:/Users/jkirtland/"]
   path = ~/.config/git/gitconfig-jkirtland
