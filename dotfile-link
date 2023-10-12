@@ -1,72 +1,151 @@
-#!/usr/bin/python3
-from glob import glob
-from os import chdir, environ, makedirs, symlink, walk
-from os.path import dirname, exists, expanduser, islink, join, realpath
+#!/usr/bin/env python3.12
+from collections.abc import Iterable
+from dataclasses import asdict, dataclass
+from os import environ
+from pathlib import Path
 from sys import stderr
+import tomllib
 
 
-REPO = environ.get('DOTFILES_REPO', expanduser('~/.dotfiles'))
-HOME = environ['HOME']
-IGNORED = []
-chdir(REPO)
+TOOL = 'dotfiles'
+
+DEFAULT_CONFIG=f"""\
+ignore = ["/{TOOL}.toml", "/.*"]
+autodot = true
+
+repository = "~/.local/share/{TOOL}"
+target = "~"
+"""
+
+
+@dataclass
+class Config:
+    ignore: list[str]
+    autodot: bool
+    repository: Path
+    target: Path
+
+    @classmethod
+    def from_kw(cls, **kw):
+        for key in 'repository', 'target':
+            if key in kw:
+                kw[key] = Path(kw[key]).expanduser()
+        return cls(**kw)
 
 
 def eprint(msg):
     print(msg, file=stderr)
 
 
-def expand_ignored():
-    ignore_globs = ['dotfile-link', '.*']
+def eexit(msg):
+    eprint(msg)
+    sys.exit(1)
+
+
+def load_config(path: Path) -> dict:
+    "Load a toml config from file *path*"
     try:
-        fh = open(join(REPO, '.dfignore'))
-        for expr in fh.readlines():
-            expr = expr.strip()
-            if expr and not expr.startswith('#'):
-                ignore_globs.append(expr)
-        fh.close()
-    except IOError:
-        pass
-    for expr in ignore_globs:
-        IGNORED.extend(glob(expr))
+        src = path.read_text()
+    except FileNotFoundError:
+        return {}
+    except Exception as ex:
+        eexit(f"{file}: {ex}")
+    try:
+        config = tomllib.loads(src)
+    except tomllib.TOMLDecodeError as ex:
+        eexit(f"{path}: {ex}")
+
+    return config
 
 
-def managed():
-    for dirpath, _, filenames in walk(REPO):
-        local_dir = dirpath[len(REPO):].lstrip('/')
-        for fn in filenames:
-            full_path = join(local_dir, fn)
-            if any(full_path.startswith(i) for i in IGNORED):
+def user_config() -> Config:
+    "Return usable config from XDG_CONFIG_DIR or defaults"
+
+    # start with base config
+    base = tomllib.loads(DEFAULT_CONFIG)
+    
+    path = Path(environ.get('XDG_CONFIG_DIR', '~/.config')).expanduser()
+    base.update(load_config(path / 'config.toml'))
+
+    return Config.from_kw(**base)
+
+
+def dir_config(path: Path, base=(), file=f"{TOOL}.toml") -> Config:
+    "Return usable config from a directory *path*"
+    base = asdict(base) if base else ()
+    return Config.from_kw(**dict(base, **load_config(path / file)))
+
+
+def folder_contents(folder: Path, config: Config) -> Iterable[Path, Path]:
+    ignored = set()
+    for ignore in config.ignore:
+        ignored.update(folder.glob(ignore.lstrip('/')))
+
+    for dirpath, dirnames, filenames in Path.walk(folder):
+        if dirpath in ignored:
+            dirnames.clear()  # stop walk() from recursing
+            continue
+        for filepath in (dirpath / fn for fn in filenames):
+            if filepath in ignored:
                 continue
+            yield filepath.relative_to(folder), filepath
+    
 
-            target = ("~/.%s" % full_path)
-            yield join(REPO, full_path), expanduser(target)
-
-
-expand_ignored()
-
-print(f"Updating {HOME} dotfiles from {REPO}")
-noop = new = error = newdir = 0
-for source, target in managed():
-    if islink(target):
-        dest = realpath(target)
-        if dest != source:
-            eprint(f"* skipping: {target} is a symlink to {dest}")
-            error += 1
+def target_folder_contents(folder_contents: Iterable[Path, Path], 
+                           target: Path,
+                           config: Config) -> Iterable[Path, Path, Path]:
+    for relative, source in folder_contents:
+        if not config.autodot or relative.parts[0].startswith('.'):
+            yield relative, source, target / relative
         else:
-            noop += 1
-        continue
-    elif exists(target):
-        eprint(f"* skipping: {target} already exists")
-        error += 1
-        continue
-    else:
-        directory = dirname(target)
-        if not exists(directory):
-            makedirs(directory)
-            newdir += 1
-        print(f"- linking {target} -> {source}")
-        symlink(source, target)
-        new += 1
+            dotted = Path(f".{relative.parts[0]}", *relative.parts[1:])           
+            yield relative, source, target / dotted
 
-print(f"{noop} unchanged, {new} new links, "
-      f"{newdir} directories created, {error} errors.")
+
+def folder_mapping(folder: Path, config: Config) -> Iterable[Path, Path, Path]:
+    "Return all non-ignored *folder* files mapped to destinations."
+    target = config.target
+    folder_config = dir_config(folder, base=config)
+    sources = folder_contents(folder, folder_config)
+    return target_folder_contents(sources, target, folder_config)
+
+
+def process_repository(config: Config):
+    noop = new = error = newdir = 0
+
+    folders = set()
+    for d in config.repository.iterdir():
+        if d.is_dir() and not d.name.startswith('.'):
+            folders.add(d)
+
+    for folder in sorted(folders):
+        msg = lambda m: eprint(f"{folder.name}: {m}")
+
+        mapping = folder_mapping(folder, config)
+        for _, source, destination in mapping:
+            relative = destination.relative_to(config.target)
+            if destination.is_symlink():
+                if destination.resolve() != source:
+                    msg(f"skipping {relative}: file is symlink pointing to {destination}")
+                    error +=1
+                else:
+                    noop += 1    
+                continue
+            elif destination.exists():
+                msg(f"skipping {relative}: a non-managed file is in the way")
+                error +=1
+                continue
+            if not destination.parent.exists():
+                destination.parent.mkdir(parents=True)
+                newdir += 1
+            msg(f"linking {relative}")
+            destination.symlink_to(source)
+            new += 1
+
+    print(f"{noop} unchanged, {new} new links, "
+          f"{newdir} directories created, {error} errors.")
+     
+
+if __name__ == '__main__':
+    config = user_config()
+    process_repository(config)
