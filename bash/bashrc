@@ -43,6 +43,8 @@ export LS_COLORS='no=00:fi=00:di=04;34:ln=04;37:pi=30;44;07:so=30;41;07:bd=30;42
 
 export GTK_THEME=Arc-Dark
 
+export MOZ_ENABLE_WAYLAND=1
+
 if [ -d ~/.config/bashrc.d ]; then
     for f in ~/.config/bashrc.d/*.sh; do
         if [[ $f != "host-*" ]]; then

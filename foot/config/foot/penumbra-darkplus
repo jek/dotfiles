@@ -1,0 +1,27 @@
+# -*- conf -*-
+# http://panda.siamak.me/
+
+[colors]
+# alpha=1.0
+background=24272B  # shade
+foreground=9E9E9E  # sky
+
+## Normal/regular colors (color palette 0-7)
+regular0=1F1F20  # black / shade-
+regular1=DF7F78  # red
+regular2=50B584  # green
+regular3=9CA748  # yellow
+regular4=7a9BEC  # blue
+regular5=FC59A6  # magenta
+regular6=00B1CE  # cyan
+regular7=636363  # white / sky-  **
+
+## Bright colors (color palette 8-15)
+bright0=F2E6D4   # bright black / sun-
+bright1=F58C81   # bright red
+bright2=54C794   # bright green
+bright3=A9B842   # bright yellow
+bright4=6EB2FD   # bright blue
+bright5=E58CC5   # bright magenta
+bright6=00C4D7   # bright cyan
+bright7=F0F0F0   # bright white / sun+

@@ -7,16 +7,32 @@
 	ci = commit
 	co = checkout
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[interactive]
+	diffFilter = delta --color-only
 [core]
 	legacyheaders = false
 	excludesfile = ~/.config/git/gitignore
+	pager = delta
+[delta]
+	navigate = true
+	light = false
+	line-numbers = true
+	hunk-header-style = omit
+[diff]
+	colorMoved = default
+[merge]
+	conflictstyle = diff3
 [repack]
 	userdeltabaseoffset = true
 [push]
 	default = simple
+
+
 [includeIf "gitdir:/Users/jek/"]
   path = ~/.config/git/gitconfig-jek
 [includeIf "gitdir:/home/jek/"]
   path = ~/.config/git/gitconfig-jek
 [includeIf "gitdir:/Users/jkirtland/"]
   path = ~/.config/git/gitconfig-jkirtland
+[init]
+	defaultBranch = main
